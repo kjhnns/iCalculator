@@ -26,8 +26,8 @@ $questions = array(
           )
 );
 
-$q = array_rand($questions);
-
+$key = array_rand($questions);
+$q = $questions[$key];
 ?>
 
 <section id="three" class="wrapper style1">
