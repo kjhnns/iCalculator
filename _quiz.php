@@ -13,7 +13,7 @@
             </section>
          </div>
          <div class="4u -1u">
-            <?php $GLOBALS['basic'] = false; include("calculator.php"); ?>
+            <?php include("_calculator.php"); ?>
          </div>
       </div>
    </div>
