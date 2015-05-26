@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<!--
+   Ion by TEMPLATED
+   templated.co @templatedco
+   Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+   <head>
+      <title>Prototype</title>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="description" content="" />
+      <meta name="keywords" content="" />
+      <!--[if lte IE 8]><script src="template/lib/html5shiv.js"></script><![endif]-->
+      <script src="template/lib/jquery.min.js"></script>
+      <script src="template/lib/skel.min.js"></script>
+      <script src="template/lib/skel-layers.min.js"></script>
+      <script src="template/lib/init.js"></script>
+      <noscript>
+         <link rel="stylesheet" href="template/stylesheets/skel.css" />
+         <link rel="stylesheet" href="template/stylesheets/style.css" />
+         <link rel="stylesheet" href="template/stylesheets/style-xlarge.css" />
+      </noscript>
+   </head>
+   <body id="top" style="min-width: 1024px; overflow: scroll;">
+
+
+         <style>
+            .btn {
+               color: #444;
+               background-color: #f5f5f5;
+               border: 1px solid #dedede;
+               width: 64px;
+               height: 29px;
+               text-align: center;
+               font-family: Roboto-Regular,helvetica,arial,sans-serif;
+               font-size: 12px;
+               cursor: pointer;
+               vertical-align: middle;
+
+               margin: 0 4.406px;
+               padding: auto;
+               float: left;
+            }
+
+            .btn.func {
+               background-color: #d6d6d6 !important;
+            }
+
+            .btn.equals {
+               background-color: #dff0d8;
+            }
+
+            .btn.disabled {
+               background-color: #333;
+               color: #CCC;
+            }
+
+            .display {
+               color: #222;
+               background-color: #fff;
+               border: 1px solid #dedede;
+               max-width: 282.313px;
+               text-align: right;
+               height: 150px;
+               font-family: Roboto-Regular,helvetica,arial,sans-serif;
+               font-size: 20px;
+               padding: 0px;
+               margin: 4.406px;
+               overflow-y: scroll;
+            }
+
+            .display p {
+               margin: 0;
+               padding: 2px;
+               color: #CCC;
+            }
+            .display p span {
+
+            }
+
+            .display p:first-child {
+               color: #222;
+            }
+
+            .calc-row {
+               min-height: 36.266px;
+               max-width: 294.313px;
+               min-width: 294.313px;
+            }
+         </style>
+         <script>
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
+            $(function() {
+               var currentTerm = [];
+               var currentResult = null;
+
+               // Value Buttons
+               $('.btn.value').click(function(e) {
+                  var el = $("<span></span>").html($(this).data('display'));
+                  $('.display p:first-child').append(el);
+                  currentTerm.push($(this).data('value'));
+                  console.log(currentTerm);
+               });
+
+               // Special c
+               $('.btn[data-special="c"]').click(function(e) {
+                  $('.display p:first-child span:last-child').remove();
+                  currentTerm.pop();
+               });
+
+               // Special ac
+               $('.btn[data-special="ac"]').click(function(e) {
+                  $('.display p:first-child span').remove();
+                  currentTerm.splice(0,currentTerm.length);
+                     var el = $("<p></p>");
+                     $('.display').prepend(el);
+               });
+
+               // Special equals
+               $('.btn.equals').click(function(e) {
+                  try {
+                      currentResult = roundToTwo(eval(formatTerm(currentTerm)));
+                  } catch (e) {
+                      if (e instanceof SyntaxError) {
+                     var el = $("<span></span>").html("Syntax Fehler: ");
+                     $('.display p:first-child').prepend(el);
+
+                     currentTerm.splice(0,currentTerm.length);
+                     currentResult = 0;
+
+                     var el = $("<p></p>");
+                     $('.display').prepend(el);
+                     return;
+                      }
+                  }
+
+
+                  // Display
+                  var el = $("<p></p>").html(currentResult);
+                  $('.display').prepend(el);
+
+                  // value
+                  currentTerm.splice(0,currentTerm.length)
+                  currentTerm[0] = currentResult;
+                  $('#result').html(currentResult);
+
+               });
+
+               function formatTerm(term) {
+                  var newTerm = [];
+                  var dot = false;
+                  var currNum = null;
+
+                  for (var i = 0; i < term.length; i++) {
+                     console.log(currNum);
+                     console.log(dot);
+                     if(term[i] === '.' && !dot) {
+                        dot = true;
+                     }
+
+
+                     if(term[i] === '(' || term[i] === ')') {
+                        if(currNum !== null) {
+                           newTerm.push(currNum);
+                        }
+                        newTerm.push(term[i]);
+                        currNum = null;
+                     }
+
+                     if(typeof term[i] === 'number') {
+                        if(currNum === null) {
+                           currNum = term[i];
+                        } else {
+                           if(dot === true) {
+                              currNum = parseFloat("" +currNum + "." + term[i]);
+                              dot = false;
+                           } else {
+                              currNum = parseFloat("" +currNum + term[i]);
+                           }
+                        }
+                     }
+
+
+                     if(typeof term[i] === 'object') {
+                        if(term[i].type === 'op') {
+                           newTerm.push(currNum);
+                           newTerm.push(term[i].val);
+                           currNum = null;
+                        }
+                        if(term[i].type === 'pow') {
+                           newTerm.push("Math.pow("+currNum+","+term[i].val+")");
+                           currNum = null;
+                        }
+                     }
+                  }
+                  if(currNum !== null) {
+                     newTerm.push(currNum);
+                  }
+
+                  console.log(newTerm);
+                  return newTerm.join("");
+
+               }
+
+            });
+         </script>
+
+      <!-- Three -->
+         <section id="three" class="wrapper style1">
+            <div class="container">
+               <div class="row">
+                  <div class="5u">
+                     <section>
+                        <h3>Bitte lösen Sie folgende Aufgabe.</h3>
+                        <section class="special box">
+                           <p>125<sup>4</sup> + 24 × 1999</p>
+                        </section>
+                     <h5>Aktuelles Taschenrechner Ergebnis:</h5>
+                        <p><div id="result" style="text-align: center; font-weight: bold">0</div></p>
+                        <p style="  text-align: center;"><input type="button" value="Prüfen" /></p>
+                     </section>
+                  </div>
+                  <div class="4u -1u">
+                  <section style="max-width: 294.313px">
+                           <div class="display">
+                              <p></p>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn disabled">x<sup>2</sup></div>
+                              <div class="btn disabled">x<sup>3</sup></div>
+                              <div class="btn disabled">x<sup>4</sup></div>
+                              <div class="btn disabled">x<sup>5</sup></div>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn value func" data-display="+" data-value='{"type": "op", "val": "+"}'">+</div>
+                              <div class="btn value func" data-display="-" data-value='{"type": "op", "val": "-"}'">-</div>
+                              <div class="btn value func" data-display="×" data-value='{"type": "op", "val": "*"}'">×</div>
+                              <div class="btn value func" data-display="÷" data-value='{"type": "op", "val": "/"}'">÷</div>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn value" data-display="7" data-value="7">7</div>
+                              <div class="btn value" data-display="8" data-value="8">8</div>
+                              <div class="btn value" data-display="9" data-value="9">9</div>
+                              <div class="btn func" data-special="ac">AC</div>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn value" data-display="4" data-value="4">4</div>
+                              <div class="btn value" data-display="5" data-value="5">5</div>
+                              <div class="btn value" data-display="6" data-value="6">6</div>
+                              <div class="btn func" data-special="c">C</div>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn value" data-display="1" data-value="1">1</div>
+                              <div class="btn value" data-display="2" data-value="2">2</div>
+                              <div class="btn value" data-display="3" data-value="3">3</div>
+                              <div class="btn value func" data-display="(" data-value="(">(</div>
+                           </div>
+                           <div class="calc-row">
+                              <div class="btn value" data-display="0" data-value="0">0</div>
+                              <div class="btn value" data-display="." data-value=".">.</div>
+                              <div class="btn equals">=</div>
+                              <div class="btn value func" data-display=")" data-value=")">)</div>
+                           </div>
+                           </section>
+                  </div>
+               </div>
+            </div>
+         </section>
+
+
+   </body>
+</html>
