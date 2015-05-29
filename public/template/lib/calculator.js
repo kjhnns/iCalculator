@@ -1,5 +1,4 @@
 
-
 $(function() {
    var currentTerm = [];
    var currentResult = null;

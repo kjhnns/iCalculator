@@ -1,13 +1,38 @@
-var express = require('express');
-var router = express.Router();
+var hbs = require('express-handlebars').create();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+var controller = {
+    'index': function(req, res, next) {
+        res.render('index');
+    },
+    'premium': function(req, res, next) {
+        res.render('setting', {
+            premium: true,
+            advertisement: false,
+            question: function() { return {__html: '125<sup>4</sup> + 24 × 1999'}; },
+            answer: 244188601
+        });
+    },
+    'basis': function(req, res, next) {
+        res.render('setting', {
+            premium: false,
+            advertisement: false,
+            question: function() { return {__html: '125<sup>4</sup> + 24 × 1999'}; },
+            answer: 244188601
+        });
+    },
+    'advertisement': function(req, res, next) {
+        res.render('setting', {
+            premium: true,
+            advertisement: true,
+            question: function() { return {__html: '125<sup>4</sup> + 24 × 1999'}; },
+            answer: 244188601
+        });
+    }
+};
 
-router.get('/premium', function(req, res, next) {
-  res.render('premium');
-});
-
-module.exports = router;
+module.exports = function(app) {
+    app.get('/', controller.index);
+    app.get('/premium', controller.premium);
+    app.get('/basis', controller.basis);
+    app.get('/advertisement', controller.advertisement);
+};
