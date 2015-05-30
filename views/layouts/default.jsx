@@ -7,14 +7,17 @@ var DefaultLayout = React.createClass({
       <html>
       <head>
           <title>ISE</title>
-          <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+          <meta httpEquiv="content-type" content="text/html; charset=utf-8" />
           <meta name="description" content="" />
           <meta name="keywords" content="" />
+          <script src="lib/react/react.min.js"></script>
+          <script src="lib/react-bootstrap/react-bootstrap.min.js"></script>
           <script src="template/lib/jquery.min.js"></script>
           <script src="template/lib/skel.min.js"></script>
           <script src="template/lib/skel-layers.min.js"></script>
           <script src="template/lib/init.js"></script>
           <script src="template/lib/calculator.js"></script>
+          <script src="template/lib/custom.js"></script>
           <link rel="stylesheet" href="template/stylesheets/custom.css" />
       </head>
 

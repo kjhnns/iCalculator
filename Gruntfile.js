@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 options: {
                     args: [],
                     ignore: ['node_modules/**'],
-                    ext: 'js,html,css',
+                    ext: 'js,html,css,jsx',
                     nodeArgs: [],
                     delayTime: 1,
                     env: {
