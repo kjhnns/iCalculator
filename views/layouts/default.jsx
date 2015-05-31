@@ -4,7 +4,7 @@ var React = require('react');
 var DefaultLayout = React.createClass({
     getInitialState: function () {
         return {
-            hyperlinkRef: 'https://www.soscisurvey.de/projekt?i='+this.props.reference
+            hyperlinkRef: 'http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?s='+this.props.reference
         };
     },
   render: function() {
