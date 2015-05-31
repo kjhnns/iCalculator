@@ -26,22 +26,27 @@ module.exports = function(grunt) {
             }
         },
         concurrent: {
-            tasks: ['nodemon', 'watch'],
+            tasks: ['nodemon'],
             options: {
                 logConcurrentOutput: true
             }
         },
-        watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
+        browserSync: {
+            bsFiles: {
+                src: ['./**/*']
+            },
+            options: {
+                proxy: 'localhost:3000',
+                watchTask: true
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-nodemon');
 
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', ['jshint', 'concurrent', 'browserSync']);
 
 };

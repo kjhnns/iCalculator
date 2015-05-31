@@ -6,6 +6,7 @@ var controller = {
     },
     'premium': function(req, res, next) {
         res.render('setting', {
+            reference: req.params.reference,
             premium: true,
             advertisement: false,
             question: function() { return {__html: '125<sup>4</sup> + 24 × 1999'}; },
@@ -32,7 +33,7 @@ var controller = {
 
 module.exports = function(app) {
     app.get('/', controller.index);
-    app.get('/premium', controller.premium);
+    app.get('/premium/:reference', controller.premium);
     app.get('/basis', controller.basis);
     app.get('/advertisement', controller.advertisement);
 };

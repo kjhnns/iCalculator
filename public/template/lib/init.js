@@ -13,7 +13,7 @@
 			// Global.
 				global: {
 					range: '*',
-					href: 'template/stylesheets/style.css',
+					href: '/template/stylesheets/style.css',
 					containers: 1024,
 					grid: {
 						gutters: {
@@ -26,7 +26,7 @@
 			// XLarge.
 				xlarge: {
 					range: '-1680',
-					href: 'template/stylesheets/style-xlarge.css',
+					href: '/template/stylesheets/style-xlarge.css',
 					containers: 1024
 				},
 
