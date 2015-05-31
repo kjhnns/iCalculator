@@ -4,7 +4,7 @@ var React = require('react');
 var DefaultLayout = React.createClass({
     getInitialState: function () {
         return {
-            hyperlinkRef: 'http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?s='+this.props.reference
+            hyperlinkRef: 'http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?t='+this.props.reference
         };
     },
   render: function() {
