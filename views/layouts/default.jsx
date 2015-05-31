@@ -2,6 +2,11 @@ var React = require('react');
 
 
 var DefaultLayout = React.createClass({
+    getInitialState: function () {
+        return {
+            hyperlinkRef: 'https://www.soscisurvey.de/projekt?i='+this.props.reference
+        };
+    },
   render: function() {
     return (
       <html>
@@ -23,7 +28,7 @@ var DefaultLayout = React.createClass({
       <body id="top">
           <div id="root">
             {this.props.children}
-            <a href="https://www.soscisurvey.de/projekt?i={this.props.reference}">weiter</a>
+            <a href={this.state.hyperlinkRef}>weiter</a>
           </div>
           <script src="/template/lib/custom.js"></script>
       </body>
