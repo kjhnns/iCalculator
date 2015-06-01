@@ -5,7 +5,9 @@ var controller = {
         res.render('index');
     },
     'premium': function(req, res, next) {
+
         res.render('setting', {
+            mode: req.params.mode,
             reference: req.params.reference,
             premium: true,
             advertisement: false,
@@ -33,7 +35,7 @@ var controller = {
 
 module.exports = function(app) {
     app.get('/', controller.index);
-    app.get('/premium/:reference', controller.premium);
+    app.get('/premium/:reference/:mode', controller.premium);
     app.get('/basis', controller.basis);
     app.get('/advertisement', controller.advertisement);
 };

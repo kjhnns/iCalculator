@@ -64,6 +64,7 @@ var result = React.createClass({
     return (
       <DefaultLayout reference={this.props.reference}>
           { this.props.advertisement ?  <div id="advertisement"></div> : '' }
+          <p>Mode: {this.props.mode}</p>
           <Calculator premium={this.props.premium} question={this.props.question} answer={this.props.answer}></Calculator>
       </DefaultLayout>
     );
