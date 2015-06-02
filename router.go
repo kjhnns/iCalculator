@@ -7,12 +7,11 @@ import (
 
 func initRouting() {
 
-   fmt.Println("routing")
+   fmt.Println("Routing")
    g.Static("/public", "./public")
-
-
    g.LoadHTMLGlob("templates/*")
 
 
-	g.GET("/", ctrl.home)
+
+	g.GET("/", ctrl.Home)
 }

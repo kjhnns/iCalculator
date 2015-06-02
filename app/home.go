@@ -7,8 +7,8 @@ import (
 
 var g *gin.Engine
 
-func home(c *gin.Context) {
-  c.HTML(http.StatusOK, "index.html", gin.H{
-      "title": "Main website",
-  })
+func Home(c *gin.Context) {
+      c.HTML(http.StatusOK, "layout.html", gin.H{
+            "title": "Main website",
+        })
 }
