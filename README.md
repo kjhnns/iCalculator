@@ -1,3 +1,2 @@
-# university project
+# iCalculator
 
-runs on node
