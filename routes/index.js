@@ -1,4 +1,3 @@
-var hbs = require('express-handlebars').create();
 
 var controller = {
     'index': function(req, res, next) {
