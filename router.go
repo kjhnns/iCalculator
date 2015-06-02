@@ -1,11 +1,18 @@
 package main
 
+import (
+   "fmt"
+   ctrl "github.com/kjhnns/iseseminar/app"
+)
+
 func initRouting() {
 
-	g.GET("/", home)
+   fmt.Println("routing")
+   g.Static("/public", "./public")
 
-	//TESTING: some dummy-routes for development and testing. not for produciton usage! implement auth!
-	g.GET("/accounts", accounts)
-	g.GET("/movie/getbytitle/:title", movieGetByTitle)
-	g.GET("/test", test)
+
+   g.LoadHTMLGlob("templates/*")
+
+
+	g.GET("/", ctrl.home)
 }
