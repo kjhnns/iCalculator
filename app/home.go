@@ -8,8 +8,16 @@ import (
 var g *gin.Engine
 
 func Home(c *gin.Context) {
+      reference := c.Params.ByName("reference")
+      mode := c.Params.ByName("mode")
       c.HTML(http.StatusOK, "layout.html", gin.H{
             "title": "Main website",
-            "test": "Main website",
+            "test": reference,
+            "test2": mode,
         })
+}
+
+
+func NotFound(c *gin.Context) {
+      c.JSON(404, gin.H{"status": "not found"})
 }

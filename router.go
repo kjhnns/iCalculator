@@ -13,5 +13,6 @@ func initRouting() {
 
 
 
-	g.GET("/", ctrl.Home)
+   g.GET("/:reference/:mode", ctrl.Home)
+   g.GET("/", ctrl.NotFound)
 }
