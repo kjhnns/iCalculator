@@ -10,5 +10,6 @@ var g *gin.Engine
 func Home(c *gin.Context) {
       c.HTML(http.StatusOK, "layout.html", gin.H{
             "title": "Main website",
+            "test": "Main website",
         })
 }
