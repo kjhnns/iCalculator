@@ -13,12 +13,14 @@ $(function() {
         nextQuestion();
         self.rightAnswers = 0;
         self.questionsAnswered = 0;
+        $('#qa').html(self.questionsAnswered);
+        $('#ra').html(self.rightAnswers);
         $('.prompt').hide();
     }
 
     right = function() {
         var rself = {};
-        rself.promptCounter = self.promptCounter;
+        rself.promptCounter = self.promptCounter + (advertisementEnabled === true? 5 : 0);
         $('.prompt.success').show();
 
         rself.id = setInterval(function() {
@@ -32,7 +34,7 @@ $(function() {
 
     wrong = function() {
         var wself = {};
-        wself.promptCounter = self.promptCounter;
+        wself.promptCounter = self.promptCounter + (advertisementEnabled === true? 5 : 0);
         $('.prompt.fail').show();
 
         wself.id = setInterval(function() {
@@ -105,11 +107,13 @@ $(function() {
 
     $('#check').click(function(e) {
         self.questionsAnswered += 1;
+        $('#qa').html(self.questionsAnswered);
         if ($(this).data('value') == currentResult) {
             right();
             self.rightAnswers += 1;
             resetCalculator();
             nextQuestion();
+            $('#ra').html(self.rightAnswers);
         } else {
             wrong();
             resetCalculator();

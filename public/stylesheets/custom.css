@@ -1,10 +1,84 @@
 body {
     min-width: 1024px;
     overflow: scroll;
+    height: 100%;
+}
+
+html {
+    height: 100%;
 }
 
 #calculator .display span {
-  float: left;
+    float: left;
+}
+
+.blurred {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.dimmed2 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+}
+
+.dimmed2:after {
+    content: " ";
+    z-index: -1;
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.redirect {
+    background: #000;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -100px;
+    text-align: center;
+    left: 0;
+    min-height: 200px;
+    color: #fff;
+    padding: 100px 0px;
+}
+
+div.status {
+    background: #000;
+    position: absolute;
+    right: 0;
+    min-width: 100px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 20px;
+}
+
+div.status p {
+    text-align: right;
+}
+
+.status.countdown {
+    top: 0;
+}
+
+.status.qa {
+    top: 50;
+    text-align: center;
+}
+
+.status.ra {
+    top: 100;
 }
 
 .prompt {
@@ -19,9 +93,11 @@ body {
 .prompt.success {
     background: #dff0d8;
 }
+
 .prompt.fail {
     background: #fcf8e3;
 }
+
 .prompt.info {
     background: #d9edf7;
 }

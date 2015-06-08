@@ -5,12 +5,14 @@ $(function() {
         var self = this;
         self.counter = 5;
         $('#advert').show();
+        $('#content').addClass('blurred');
         $('#sec').html(self.counter);
 
         self.id = setInterval(function() {
             self.counter--;
             if (self.counter < 0) {
                 $('#advert').hide();
+                $('#content').removeClass('blurred');
                 clearInterval(self.id);
             } else {
                 $('#sec').html(self.counter);

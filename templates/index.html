@@ -1,6 +1,5 @@
-{{define "body"}}
-{{template "prompt"}}
-<section class="wrapper style1">
+{{define "body"}} {{template "prompt"}}
+<section class="wrapper style1" id="content">
     <div class="container">
         <div class="row">
             <div class="5u">
@@ -11,14 +10,14 @@
                     </section>
                     <h5>Current iCalculator result</h5>
                     <div class="row">
-                        <div class="6u">
+                        <div class="7u">
                             <p class="centerText resultbox">
                                 <span id="result">0</span>
                             </p>
                         </div>
-                        <div class="6u">
+                        <div class="5u">
                             <p class="centerText">
-                                <input type="button" value="Submit Result" id="check" />
+                                <input type="button" value="Submit" id="check" />
                             </p>
                         </div>
                     </div>
@@ -30,8 +29,9 @@
         </div>
     </div>
 </section>
-{{template "countdown" .}} {{if .advert}} {{template "advert" .}} {{end}}
+{{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
+var advertisementEnabled = {{ .advert }};
 $(function() {
     var timeOutFunction = function() {
         // variables
@@ -47,6 +47,9 @@ $(function() {
         href += "&ra=" + status.rA;
         href += "&qa=" + status.qA;
 
+        $('#advert').hide();
+        $('#redirected').show();
+        $('#content').addClass('blurred');
         location.href = href;
     };
     setTimeout(timeOutFunction, 60000); // 60,000ms eq 1min

@@ -1,0 +1,39 @@
+{{define "status"}}
+<script>
+$(function() {
+    showCountdown = function() {
+        var self = {};
+        self.counter = 60 * 1;
+        $('#countdown').html(toMin(self.counter));
+
+        self.id = setInterval(function() {
+            if (self.counter > 0) {
+                self.counter--;
+            }
+            $('#countdown').html(toMin(self.counter));
+        }, 1000);
+    };
+
+    function toMin(secs) {
+        var s = parseInt(secs % 60);
+        return parseInt(secs / 60) + ":" + (s < 10 ? "0" : "") + s;
+    }
+    showCountdown();
+});
+</script>
+<div class="status countdown">
+    <p>Remaining: <span id='countdown'></span></p>
+</div>
+<div class="status qa">
+    <p>Questions Answered: <span id='qa'></span></p>
+</div>
+<div class="status ra">
+    <p>Correct Answers: <span id='ra'></span></p>
+</div>
+
+<div class="dimmed2" id="redirected" style="display:none;">
+<div class="redirect">
+You are being redirected...
+</div>
+</div>
+{{end}}
