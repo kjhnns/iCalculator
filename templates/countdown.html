@@ -1,0 +1,32 @@
+{{define "countdown"}}
+<script>
+$(function() {
+    showCountdown = function() {
+        var self = this;
+        self.counter = 60 * 3;
+            $('#countdown').html(toMin(self.counter));
+
+        self.id = setInterval(function() {
+            self.counter--;
+            $('#countdown').html(toMin(self.counter));
+        }, 1000);
+    };
+
+    function toMin(secs) {
+      var s =parseInt(secs%60);
+      return parseInt(secs / 60) + ":" + (s < 10 ? "0" : "") + s;
+    }
+    showCountdown();
+});
+</script>
+<div class="countdown" style="  background: #000;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 40px;
+  color: #fff;
+  padding: 5px;">
+    Remaining: <span id='countdown'></span>
+</div>
+{{end}}

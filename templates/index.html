@@ -23,19 +23,27 @@
         </div>
     </div>
 </section>
+{{template "countdown" .}}
+{{if .advert}} {{template "advert" .}} {{end}}
 <script>
 $(function() {
     var timeOutFunction = function() {
+        // variables
         var status = getStatus();
-        console.log(status);
         var reference = "{{ .reference }}";
-        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?i=" + reference + "&password=test";
-        console.log(href);
-        // location.href = href;
+
+        // baseurl
+        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
+
+        // parameters
+        href += "?i=" + reference;
+        href += "&password=test";
+        href += "&ra="+status.rA;
+        href += "&qa="+status.qA;
+
+        location.href = href;
     };
     setTimeout(timeOutFunction, 120000); // 120,000ms eq 3min
 });
 </script>
-
-{{if .advert}} {{template "advert" .}} {{end}}
 {{end}}
