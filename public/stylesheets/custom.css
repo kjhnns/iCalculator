@@ -3,6 +3,10 @@ body {
     overflow: scroll;
 }
 
+#calculator .display span {
+  float: left;
+}
+
 .prompt {
     position: absolute;
     top: 50px;

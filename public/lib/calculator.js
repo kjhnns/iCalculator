@@ -3,10 +3,15 @@
 var currentResult = null;
 $(function() {
     var currentTerm = [];
+    var newLine = false;
 
     // Value Buttons
     $('.btn.value').click(function(e) {
         e.preventDefault();
+        if(newLine === true) {
+            $('.btn[data-special="ac"]').click();
+            newLine = false;
+        }
         var el = $("<span></span>").html($(this).data('display'));
         $('.display p:first-child').append(el);
         currentTerm.push($(this).data('value'));
@@ -30,8 +35,10 @@ $(function() {
 
 
     // Special equals
-    $('.btn.equals').click(function(e) {
-        e.preventDefault();
+    $('.btn.equals').click(function(evt) {
+        evt.preventDefault();
+        var el;
+
         function roundToTwo(num) {
             return +(Math.round(num + "e+2") + "e-2");
         }
@@ -45,32 +52,33 @@ $(function() {
                 currentTerm.splice(0, currentTerm.length);
                 currentResult = 0;
 
-                var el = $("<p></p>");
+                el = $("<p></p>");
                 $('.display').prepend(el);
                 return;
             }
         }
 
         if (isNaN(currentResult)) {
-            var el = $("<span></span>").html("Invalid: ");
+            el = $("<span></span>").html("Invalid: ");
             $('.display p:first-child').prepend(el);
 
             currentTerm.splice(0, currentTerm.length);
             currentResult = 0;
 
-            var el = $("<p></p>");
+            el = $("<p></p>");
             $('.display').prepend(el);
             return;
         }
 
         // Display
-        var el = $("<p></p>").html(currentResult);
+        el = $("<p></p>").html(currentResult);
         $('.display').prepend(el);
 
         // value
-        currentTerm.splice(0, currentTerm.length)
+        currentTerm.splice(0, currentTerm.length);
         currentTerm[0] = currentResult;
         $('#result').html(currentResult);
+        newLine = true;
 
     });
 
