@@ -3,11 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
-	r "github.com/dancannon/gorethink"
 	"github.com/gin-gonic/gin"
 )
 
-var session *r.Session
 var g *gin.Engine
 
 

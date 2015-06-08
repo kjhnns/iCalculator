@@ -1,37 +1,28 @@
 {
-	"ImportPath": "github.com/jposor/imdbsearch",
-	"GoVersion": "go1.4.2",
+	"ImportPath": "github.com/kjhnns/iseseminar",
+	"GoVersion": "go1.4.1",
 	"Deps": [
-		{
-			"ImportPath": "github.com/Sirupsen/logrus",
-			"Comment": "v0.7.3-2-g26709e2",
-			"Rev": "26709e2714106fb8ad40b773b711ebce25b78914"
-		},
-		{
-			"ImportPath": "github.com/cenkalti/backoff",
-			"Rev": "9831e1e25c874e0a0601b6dc43641071414eec7a"
-		},
-		{
-			"ImportPath": "github.com/dancannon/gorethink",
-			"Comment": "v0.7.1",
-			"Rev": "0fcd578dc17224eb4812abb34a472f6b72d9c62f"
-		},
 		{
 			"ImportPath": "github.com/gin-gonic/gin",
 			"Comment": "v0.6",
 			"Rev": "e2fa89777e344782ef5d31929f095f4589c35dcc"
 		},
 		{
-			"ImportPath": "github.com/golang/protobuf/proto",
-			"Rev": "655cdfa588ea190e901bc5590e65d5621688847c"
-		},
-		{
-			"ImportPath": "github.com/julienschmidt/httprouter",
-			"Rev": "999ba04938b528fb4fb859231ee929958b8db4a6"
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "404710eaa45fcb6ac1731ce1808110e18594c3c4"
 		},
 		{
 			"ImportPath": "github.com/mattn/go-colorable",
 			"Rev": "d67e0b7d1797975196499f79bcc322c08b9f218b"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "a74a0672349d0bb67e7d25f8e88944019c98a73b"
+		},
+		{
+			"ImportPath": "gopkg.in/bluesuncorp/validator.v5",
+			"Comment": "v5.5.1",
+			"Rev": "1d61bf31487322f9bffa4d9f1eda4a53175b58dd"
 		}
 	]
 }
