@@ -1,29 +1,42 @@
 {{define "body"}}
-<section className="wrapper style1">
-    <div className="container">
-        <div className="row">
-            <div className="8u">
+<section class="wrapper style1">
+    <div class="container">
+        <div class="row">
+            <div class="5u">
                 <section>
-                    <h2>Prototyp Modi testen</h2>
-                    <p></p>
+                    <h3>Bitte lösen Sie folgende Aufgabe.</h3>
+                    <section class="special box">
+                        <p id="question"></p>
+                    </section>
+                    <h5>Aktuelles Taschenrechner Ergebnis:</h5>
+                    <p>
+                        <div id="result">0</div>
+                    </p>
+                    <p class="centerText">
+                        <input type="button" value="Prüfen" id="check" />
+                    </p>
                 </section>
             </div>
-            <div className="4u">
-                <section>
-                    <h3>&nbsp;</h3>
-                    <ul className="actions">
-                        <li><a href="premium" className="button alt">Premiumversion</a></li>
-                    </ul>
-                    <ul className="actions">
-                        <li><a href="basis" className="button alt">Basisversion</a></li>
-                    </ul>
-                    <ul className="actions">
-                        <li><a href="advertisement" className="button alt">Advertisement</a></li>
-                    </ul>
-                </section>
+            <div class="4u -1u">
+                {{template "calculator" .}}
             </div>
         </div>
     </div>
 </section>
-<a href="http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?i=asd&password=test&debug=true">weiter</a>
+<script>
+$(function() {
+    var timeOutFunction = function() {
+        var status = getStatus();
+        console.log(status);
+        var reference = "{{ .reference }}";
+        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?i=" + reference + "&password=test";
+        console.log(href);
+        // location.href = href;
+    };
+    setTimeout(timeOutFunction, 120000); // 120,000ms eq 3min
+});
+</script>
+
+
+                {{template "advert" .}}
 {{end}}

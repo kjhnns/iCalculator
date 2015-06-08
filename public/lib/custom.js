@@ -1,46 +1,68 @@
+// calculator Functions
+
+var getStatus = null;
+
+$(function() {
+    var self = this;
+
+    getStatus = function(reference) {
+        return {
+            rA: self.rightAnswers,
+            qA: self.questionsAnswered
+        };
+    };
 
 
-// var ReactAdvertisement = React.createClass({displayName: "AdvertisementClass",
-//   getInitialState: function() {
-//     return {
-//       secondsRemaining: this.props.secondsRemaining
-//     };
-//   },
-//   tick: function() {
-//     this.setState({secondsRemaining: this.state.secondsRemaining - 1});
-//     if (this.state.secondsRemaining <= 0) {
-//       React.unmountComponentAtNode(this.getDOMNode().parentNode);
-//       clearInterval(this.interval);
-//     }
-//   },
-//   componentDidMount: function() {
-//     this.setState({ secondsRemaining: this.props.secondsRemaining });
-//     this.interval = setInterval(this.tick, 1000);
-//   },
-//   componentWillUnmount: function() {
-//     clearInterval(this.interval);
-//   },
-//   render: function() {
-//     return (
-//         React.createElement("div", {className: "dimmed"},
-//            React.createElement("div", {className: "container"},
-//               React.createElement("div", {className: "row"},
-//                  React.createElement("div", {className: "8u -2u"},
-//                  React.createElement("br", null), React.createElement("br", null),
-//                     React.createElement("section", {className: "special box", style: {'backgroundColor': '#fff'}},
-//                     React.createElement("h1", null, "Fahre Sie in die Schweiz!"),
-//                     React.createElement("a", {href: "#", className: "image fit"}, React.createElement("img", {src: "template/images/pic03.jpg", alt: ""})),
-//                     React.createElement("i", null, "Werbeanzeige verschwindet in ", React.createElement("span", null, this.state.secondsRemaining), " Sekunden ")
-//                     )
-//                  )
-//               )
-//            )
-//         )
-//     );
-//   }
-// });
+    var calculatorExercises = [{
+        question: '526<sup>3</sup> + 421 + 1299<sup>2</sup>',
+        answer: 147219398
+    }, {
+        question: '9852 + 5678<sup>2</sup> + 5449<sup>3</sup>',
+        answer: 161821783385
+    }, {
+        question: '448<sup>3</sup> + 2256 + 4589<sup>2</sup>',
+        answer: 110976569
+    }, {
+        question: '899<sup>3</sup> + 567 + 2589<sup>2</sup>',
+        answer: 733276187
+    }, {
+        question: '5561 + 1042<sup>2</sup> + 3787<sup>3</sup>',
+        answer: 54311855728
+    }, {
+        question: '748<sup>3</sup> + 1130 + 2966<sup>2</sup>',
+        answer: 427307278
+    }];
 
-// React.render(
-//   React.createElement(ReactAdvertisement, {secondsRemaining: 10}),
-//   document.querySelector('#advertisement')
-// );
+    function resetCalculator() {
+        $('.btn[data-special="ac"]').click();
+        currentResult = 0;
+        $('#result').html(currentResult);
+    }
+
+    function nextQuestion() {
+        var exercise = calculatorExercises.pop();
+        if (exercise !== undefined) {
+            $('#question').html(exercise.question);
+            $('#check').data('value', exercise.answer);
+        }
+    }
+    nextQuestion();
+
+    self.rightAnswers = 0;
+    self.questionsAnswered = 0;
+
+    $('#check').click(function(e) {
+        self.questionsAnswered += 1;
+        if ($(this).data('value') == currentResult) {
+            alert("Ihr Ergebnis ist richtig!");
+            self.rightAnswers += 1;
+            resetCalculator();
+            nextQuestion();
+        } else {
+            alert("Ihr Ergebnis ist noch nicht richtig!");
+            resetCalculator();
+            nextQuestion();
+        }
+    });
+
+});
