@@ -4,17 +4,23 @@
         <div class="row">
             <div class="5u">
                 <section>
-                    <h3>Bitte lösen Sie folgende Aufgabe.</h3>
+                    <h3>Please use the iCalculator to solve the following exercise.</h3>
                     <section class="special box">
                         <p id="question"></p>
                     </section>
-                    <h5>Aktuelles Taschenrechner Ergebnis:</h5>
-                    <p>
-                        <div id="result">0</div>
-                    </p>
-                    <p class="centerText">
-                        <input type="button" value="Prüfen" id="check" />
-                    </p>
+                    <h5>Current iCalculator result</h5>
+                    <div class="row">
+                        <div class="6u">
+                            <p class="centerText resultbox">
+                                <span id="result">0</span>
+                            </p>
+                        </div>
+                        <div class="6u">
+                            <p class="centerText">
+                                <input type="button" value="Submit Result" id="check" />
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </div>
             <div class="4u -1u">
@@ -23,8 +29,7 @@
         </div>
     </div>
 </section>
-{{template "countdown" .}}
-{{if .advert}} {{template "advert" .}} {{end}}
+{{template "countdown" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
 $(function() {
     var timeOutFunction = function() {
@@ -38,8 +43,8 @@ $(function() {
         // parameters
         href += "?i=" + reference;
         href += "&password=test";
-        href += "&ra="+status.rA;
-        href += "&qa="+status.qA;
+        href += "&ra=" + status.rA;
+        href += "&qa=" + status.qA;
 
         location.href = href;
     };
