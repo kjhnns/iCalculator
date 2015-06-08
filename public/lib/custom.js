@@ -10,9 +10,6 @@ $(function() {
         nextQuestion();
         self.rightAnswers = 0;
         self.questionsAnswered = 0;
-        if (showAdvertisement !== null) {
-            showAdvertisement();
-        }
     }
 
     getStatus = function(reference) {

@@ -2,9 +2,11 @@
 <script>
 $(function() {
     showAdvertisement = function() {
-        $('#advert').show();
         var self = this;
-        self.counter = 10;
+        self.counter = 5;
+        $('#advert').show();
+        $('#sec').html(self.counter);
+
         self.id = setInterval(function() {
             self.counter--;
             if (self.counter < 0) {
@@ -15,7 +17,7 @@ $(function() {
             }
         }, 1000);
     };
-    // showAdvertisement();
+    showAdvertisement();
 });
 </script>
 <div class="dimmed" id="advert">
