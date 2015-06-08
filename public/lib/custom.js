@@ -6,7 +6,7 @@ var showAdvertisement = null;
 var right, wrong, info;
 
 $(function() {
-    var self = this;
+    var self = {};
     self.promptCounter = 2;
 
     function appInit() {
