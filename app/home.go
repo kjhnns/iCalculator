@@ -3,17 +3,31 @@ package app
 import (
    "github.com/gin-gonic/gin"
    "net/http"
+   "strconv"
+   "fmt"
 )
 
 var g *gin.Engine
 
+func hasBit(n int, pos uint) bool {
+    val := n & (1 << pos)
+    return (val > 0)
+}
+
 func Home(c *gin.Context) {
       reference := c.Params.ByName("reference")
-      mode := c.Params.ByName("mode")
+      modeStr := c.Params.ByName("mode")
+      mode, _ := strconv.ParseUint(modeStr, 10, 8)
+
+      fmt.Println("New Quiz Session")
+      fmt.Printf("Advertisement: \t\t %t \n",  hasBit(int(mode), 1))
+      fmt.Printf("Limited Features: \t %t \n",  hasBit(int(mode), 0))
+
       c.HTML(http.StatusOK, "layout.html", gin.H{
             "title": "Main website",
             "reference": reference,
-            "mode": mode,
+            "advert": hasBit(int(mode), 1),
+            "features": hasBit(int(mode), 0),
         })
 }
 

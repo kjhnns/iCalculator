@@ -3,12 +3,21 @@
     <div class="display">
         <p></p>
     </div>
+    {{if .features}}
+    <div class="calc-row">
+        <div class="btn disabled">x<sup>2</sup></div>
+        <div class="btn disabled">x<sup>3</sup></div>
+        <div class="btn disabled">x<sup>4</sup></div>
+        <div class="btn disabled">x<sup>5</sup></div>
+    </div>
+    {{else}}
     <div class="calc-row">
         <div class="btn value func" data-display="<sup>2</sup>" data-value='{"type": "pow", "val": 2}'>x<sup>2</sup></div>
         <div class="btn value func" data-display="<sup>3</sup>" data-value='{"type": "pow", "val": 3}'>x<sup>3</sup></div>
         <div class="btn value func" data-display="<sup>4</sup>" data-value='{"type": "pow", "val": 4}'>x<sup>4</sup></div>
         <div class="btn value func" data-display="<sup>5</sup>" data-value='{"type": "pow", "val": 5}'>x<sup>5</sup></div>
     </div>
+    {{end}}
     <div class="calc-row">
         <div class="btn value func" data-display="+" data-value='{"type": "op", "val": "+"}'>+</div>
         <div class="btn value func" data-display="-" data-value='{"type": "op", "val": "-"}'>-</div>

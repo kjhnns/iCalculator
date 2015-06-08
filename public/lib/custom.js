@@ -1,9 +1,19 @@
 // calculator Functions
 
 var getStatus = null;
+var showAdvertisement = null;
 
 $(function() {
     var self = this;
+
+    function appInit() {
+        nextQuestion();
+        self.rightAnswers = 0;
+        self.questionsAnswered = 0;
+        if (showAdvertisement !== null) {
+            showAdvertisement();
+        }
+    }
 
     getStatus = function(reference) {
         return {
@@ -44,12 +54,11 @@ $(function() {
         if (exercise !== undefined) {
             $('#question').html(exercise.question);
             $('#check').data('value', exercise.answer);
+            if (showAdvertisement !== null) {
+                showAdvertisement();
+            }
         }
     }
-    nextQuestion();
-
-    self.rightAnswers = 0;
-    self.questionsAnswered = 0;
 
     $('#check').click(function(e) {
         self.questionsAnswered += 1;
@@ -65,4 +74,5 @@ $(function() {
         }
     });
 
+    appInit();
 });

@@ -37,6 +37,5 @@ $(function() {
 });
 </script>
 
-
-                {{template "advert" .}}
+{{if .advert}} {{template "advert" .}} {{end}}
 {{end}}

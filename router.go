@@ -10,6 +10,7 @@ func initRouting() {
    fmt.Println("Routing")
    g.Static("/public", "./public")
    g.LoadHTMLGlob("templates/*")
+   g.StaticFile("/favicon.ico", "./resources/favicon.ico")
 
 
 
