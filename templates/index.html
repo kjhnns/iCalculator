@@ -6,14 +6,14 @@
                 <section>
                     <h3>Bitte lösen Sie folgende Aufgabe.</h3>
                     <section class="special box">
-                        {{ .test }}
+                        <p id="question"></p>
                     </section>
                     <h5>Aktuelles Taschenrechner Ergebnis:</h5>
                     <p>
                         <div id="result">0</div>
                     </p>
                     <p class="centerText">
-                        <input type="button" value="Prüfen" id="check" data-value="1" />
+                        <input type="button" value="Prüfen" id="check" />
                     </p>
                 </section>
             </div>
@@ -23,5 +23,20 @@
         </div>
     </div>
 </section>
-<a href="http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?i=asd&password=test&debug=true">weiter</a>
+<script>
+$(function() {
+    var timeOutFunction = function() {
+        var status = getStatus();
+        console.log(status);
+        var reference = "{{ .reference }}";
+        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/?i=" + reference + "&password=test";
+        console.log(href);
+        // location.href = href;
+    };
+    setTimeout(timeOutFunction, 120000); // 120,000ms eq 3min
+});
+</script>
+
+
+                {{template "advert" .}}
 {{end}}

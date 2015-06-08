@@ -12,8 +12,8 @@ func Home(c *gin.Context) {
       mode := c.Params.ByName("mode")
       c.HTML(http.StatusOK, "layout.html", gin.H{
             "title": "Main website",
-            "test": reference,
-            "test2": mode,
+            "reference": reference,
+            "mode": mode,
         })
 }
 
