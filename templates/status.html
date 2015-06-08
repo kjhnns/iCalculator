@@ -3,7 +3,7 @@
 $(function() {
     showCountdown = function() {
         var self = {};
-        self.counter = 60 * 1;
+        self.counter = 60 * timeToRedirect;
         $('#countdown').html(toMin(self.counter));
 
         self.id = setInterval(function() {

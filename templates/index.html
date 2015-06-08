@@ -31,7 +31,6 @@
 </section>
 {{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
-var advertisementEnabled = {{ .advert }};
 $(function() {
     var timeOutFunction = function() {
         // variables
@@ -52,7 +51,7 @@ $(function() {
         $('#content').addClass('blurred');
         location.href = href;
     };
-    setTimeout(timeOutFunction, 60000); // 60,000ms eq 1min
+    setTimeout(timeOutFunction, (timeToRedirect* 60) * 1000); // 60,000ms eq 1min
 });
 </script>
 {{end}}
