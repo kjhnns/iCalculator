@@ -24,7 +24,7 @@ func Home(c *gin.Context) {
       fmt.Printf("Limited Features: \t %t \n",  hasBit(int(mode), 0))
 
       c.HTML(http.StatusOK, "layout.html", gin.H{
-            "title": "Main website",
+            "title": "iCalculator",
             "reference": reference,
             "advert": hasBit(int(mode), 1),
             "features": hasBit(int(mode), 0),
