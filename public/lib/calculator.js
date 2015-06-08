@@ -6,6 +6,7 @@ $(function() {
 
     // Value Buttons
     $('.btn.value').click(function(e) {
+        e.preventDefault();
         var el = $("<span></span>").html($(this).data('display'));
         $('.display p:first-child').append(el);
         currentTerm.push($(this).data('value'));
@@ -13,12 +14,14 @@ $(function() {
 
     // Special c
     $('.btn[data-special="c"]').click(function(e) {
+        e.preventDefault();
         $('.display p:first-child span:last-child').remove();
         currentTerm.pop();
     });
 
     // Special ac
     $('.btn[data-special="ac"]').click(function(e) {
+        e.preventDefault();
         $('.display p:first-child span').remove();
         currentTerm.splice(0, currentTerm.length);
         var el = $("<p></p>");
@@ -28,6 +31,7 @@ $(function() {
 
     // Special equals
     $('.btn.equals').click(function(e) {
+        e.preventDefault();
         function roundToTwo(num) {
             return +(Math.round(num + "e+2") + "e-2");
         }

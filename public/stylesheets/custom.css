@@ -3,6 +3,25 @@ body {
     overflow: scroll;
 }
 
+.prompt {
+    position: absolute;
+    top: 50px;
+    padding: 10px;
+    width: 500px;
+    left: 50%;
+    margin-left: -250px;
+}
+
+.prompt.success {
+    background: #dff0d8;
+}
+.prompt.fail {
+    background: #fcf8e3;
+}
+.prompt.info {
+    background: #d9edf7;
+}
+
 #skel-layers-hiddenWrapper {
     display: none;
 }

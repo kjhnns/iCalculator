@@ -3,14 +3,60 @@
 var getStatus = null;
 var showAdvertisement = null;
 
+var right, wrong, info;
+
 $(function() {
     var self = this;
+    self.promptCounter = 2;
 
     function appInit() {
         nextQuestion();
         self.rightAnswers = 0;
         self.questionsAnswered = 0;
+        $('.prompt').hide();
     }
+
+    right = function() {
+        var rself = {};
+        rself.promptCounter = self.promptCounter;
+        $('.prompt.success').show();
+
+        rself.id = setInterval(function() {
+            rself.promptCounter--;
+            if (rself.promptCounter < 0) {
+                $('.prompt.success').hide();
+                clearInterval(rself.id);
+            }
+        }, 1000);
+    };
+
+    wrong = function() {
+        var wself = {};
+        wself.promptCounter = self.promptCounter;
+        $('.prompt.fail').show();
+
+        wself.id = setInterval(function() {
+            wself.promptCounter--;
+            if (wself.promptCounter < 0) {
+                $('.prompt.fail').hide();
+                clearInterval(wself.id);
+            }
+        }, 1000);
+    };
+
+    info = function() {
+        var iself = {};
+        iself.promptCounter = self.promptCounter;
+        $('.prompt.info').show();
+
+        iself.id = setInterval(function() {
+            iself.promptCounter--;
+            if (iself.promptCounter < 0) {
+                $('.prompt.info').hide();
+                clearInterval(iself.id);
+            }
+        }, 1000);
+    };
 
     getStatus = function(reference) {
         return {
@@ -60,12 +106,12 @@ $(function() {
     $('#check').click(function(e) {
         self.questionsAnswered += 1;
         if ($(this).data('value') == currentResult) {
-            alert("Ihr Ergebnis ist richtig!");
+            right();
             self.rightAnswers += 1;
             resetCalculator();
             nextQuestion();
         } else {
-            alert("Ihr Ergebnis ist noch nicht richtig!");
+            wrong();
             resetCalculator();
             nextQuestion();
         }
