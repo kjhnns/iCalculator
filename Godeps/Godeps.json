@@ -4,8 +4,8 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/gin-gonic/gin",
-			"Comment": "v0.6",
-			"Rev": "e2fa89777e344782ef5d31929f095f4589c35dcc"
+			"Comment": "v1.0rc1-68-gce78449",
+			"Rev": "ce784498b404909aad90c715099d38d0fabd3b1b"
 		},
 		{
 			"ImportPath": "github.com/manucorporat/sse",
