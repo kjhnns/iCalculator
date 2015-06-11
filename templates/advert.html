@@ -1,26 +1,23 @@
 {{define "advert"}}
 <script>
-$(function() {
-    showAdvertisement = function() {
-        var self = this;
-        self.counter = 5;
-        $('#advert').show();
-        $('#content').addClass('blurred');
-        $('#sec').html(self.counter);
+showAdvertisement = function() {
+    var self = {};
+    self.counter = 3;
+    $('#advert').show();
+    $('#content').addClass('blurred');
+    $('#sec').html(self.counter);
 
-        self.id = setInterval(function() {
-            self.counter--;
-            if (self.counter < 0) {
-                $('#advert').hide();
-                $('#content').removeClass('blurred');
-                clearInterval(self.id);
-            } else {
-                $('#sec').html(self.counter);
-            }
-        }, 1000);
-    };
-    showAdvertisement();
-});
+    self.id = setInterval(function() {
+        self.counter--;
+        if (self.counter < 0) {
+            $('#advert').hide();
+            $('#content').removeClass('blurred');
+            clearInterval(self.id);
+        } else {
+            $('#sec').html(self.counter);
+        }
+    }, 1000);
+};
 </script>
 <div class="dimmed" id="advert">
     <div class="container">
@@ -31,7 +28,7 @@ $(function() {
                 <section class="special box" style="background-color: #fff">
                     <h1>Fahre Sie in die Schweiz!</h1>
                     <a href="#" class="image fit"><img src="/public/images/pic03.jpg" alt="" /></a>
-                    <i>Werbeanzeige verschwindet in <span id="sec">10</span> Sekunden </i>
+                    <i>Werbeanzeige verschwindet in <span id="sec">3</span> Sekunden </i>
                 </section>
             </div>
         </div>

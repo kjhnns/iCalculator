@@ -31,27 +31,12 @@
 </section>
 {{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
-$(function() {
-    var timeOutFunction = function() {
-        // variables
-        var status = getStatus();
-        var reference = "{{ .reference }}";
-
-        // baseurl
-        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
-
-        // parameters
-        href += "?i=" + reference;
-        href += "&password=test";
-        href += "&ra=" + status.rA;
-        href += "&qa=" + status.qA;
-
-        $('#advert').hide();
-        $('#redirected').show();
-        $('#content').addClass('blurred');
-        location.href = href;
-    };
-    setTimeout(timeOutFunction, (timeToRedirect* 60) * 1000); // 60,000ms eq 1min
-});
+var advertisementEnabled = {{ .advert }};
+var timeToRedirect = 3;
+var userReference = "{{ .reference }}";
+var showAdvertisement;
+var app = app();
+var intro = intro();
 </script>
+{{template "intro"}}
 {{end}}

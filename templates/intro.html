@@ -1,0 +1,47 @@
+{{define "intro"}}
+<div class="dimmed" id="intro">
+    <div class="container">
+        <div class="row">
+            <div class="8u -2u">
+                <br/>
+                <br/>
+                <section class="special box" style="background-color: #fff">
+                    <div class="site1" style="display:initial;">
+                        <h1>Welcome to iCalculator!</h1>
+                        <p>In the following tutorial you will get a quick insight into the functionalities of iCaluclator. Besides that we want to give you an idea about the questions that you are going to encounter in the test phase of iCalculator. </p>
+                        <input type="button" value="Skip tutorial" onclick="intro.start()" />
+                        <input type="button" value="Next" onclick="intro.next()" />
+                    </div>
+                    <div class="site2" style="display:none;">
+                        <h1>Questions that you are going to encounter</h1>
+                        <p>The questions that you are going to encounter during the test phase need to get solved with the iCalculator. The quiz interface is put together by three components. Within the red frame you can see the questions that you need to solve.</p>
+                        <img src="/public/images/1.png" alt="" class="image fit border" />
+                        <input type="button" value="Skip tutorial" onclick="intro.start()" />
+                        <input type="button" value="Next" onclick="intro.next()" />
+                    </div>
+                     <div class="site3" style="display:none;">
+                        <h1>iCalculator</h1>
+                        <p>Use your mouse to operate the iCalculator application.  </p>
+                        <img src="/public/images/2.png" alt="" class="image fit border" />
+                        <input type="button" value="Skip tutorial" onclick="intro.start()" />
+                        <input type="button" value="Next" onclick="intro.next()" />
+                    </div>
+                    <div class="site4" style="display:none;">
+                        <h1>Results</h1>
+                        <p>Once you are satisfied with the term you've entered into the iCalculator, you can solve the term by pressing the green equation button. The result from iCalculator is going to be set as the current result. Afterwards you can submit your result by pressing the "SUBMIT" button. Right after the submission, you will get feedback whether the result was correct and proceed to the next question.</p>
+                        <img src="/public/images/3.png" alt="" class="image fit border" />
+                        <input type="button" value="Skip tutorial" onclick="intro.start()" />
+                        <input type="button" value="Next" onclick="intro.next()" />
+                    </div>
+                    <div class="site5" style="display:none;">
+                        <h1>Free Version</h1>
+                        <p>In the free basic version of iCalculator you can not access the exponentiate functionalities. But exponentiation corresponds to repeated multiplication of the term by its self.</p>
+                        <img src="/public/images/4.png" alt="" class="image fit border" />
+                        <input type="button" value="Start" onclick="intro.start()" />
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

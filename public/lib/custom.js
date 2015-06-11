@@ -1,26 +1,29 @@
 // calculator Functions
 
 var getStatus = null;
-var showAdvertisement = null;
-
 var right, wrong, info;
 
-$(function() {
+function app() {
     var self = {};
     self.promptCounter = 2;
 
-    function appInit() {
+    self.initialize = function() {
+        redirectTimer();
         nextQuestion();
         self.rightAnswers = 0;
         self.questionsAnswered = 0;
         $('#qa').html(self.questionsAnswered);
         $('#ra').html(self.rightAnswers);
         $('.prompt').hide();
-    }
+        if (showAdvertisement !== undefined) {
+            showAdvertisement();
+        }
+        self.showCountdown();
+    };
 
-    right = function() {
+    self.right = function() {
         var rself = {};
-        rself.promptCounter = self.promptCounter + (advertisementEnabled === true? 5 : 0);
+        rself.promptCounter = self.promptCounter + (advertisementEnabled === true ? 5 : 0);
         $('.prompt.success').show();
 
         rself.id = setInterval(function() {
@@ -32,9 +35,9 @@ $(function() {
         }, 1000);
     };
 
-    wrong = function() {
+    self.wrong = function() {
         var wself = {};
-        wself.promptCounter = self.promptCounter + (advertisementEnabled === true? 5 : 0);
+        wself.promptCounter = self.promptCounter + (advertisementEnabled === true ? 5 : 0);
         $('.prompt.fail').show();
 
         wself.id = setInterval(function() {
@@ -46,7 +49,7 @@ $(function() {
         }, 1000);
     };
 
-    info = function() {
+    self.info = function() {
         var iself = {};
         iself.promptCounter = self.promptCounter;
         $('.prompt.info').show();
@@ -60,7 +63,7 @@ $(function() {
         }, 1000);
     };
 
-    getStatus = function(reference) {
+    self.getStatus = function(reference) {
         return {
             rA: self.rightAnswers,
             qA: self.questionsAnswered
@@ -99,7 +102,7 @@ $(function() {
         if (exercise !== undefined) {
             $('#question').html(exercise.question);
             $('#check').data('value', exercise.answer);
-            if (showAdvertisement !== null) {
+            if (showAdvertisement !== undefined) {
                 showAdvertisement();
             }
         }
@@ -109,17 +112,80 @@ $(function() {
         self.questionsAnswered += 1;
         $('#qa').html(self.questionsAnswered);
         if ($(this).data('value') == currentResult) {
-            right();
+            self.right();
             self.rightAnswers += 1;
             resetCalculator();
             nextQuestion();
             $('#ra').html(self.rightAnswers);
         } else {
-            wrong();
+            self.wrong();
             resetCalculator();
             nextQuestion();
         }
     });
 
-    appInit();
-});
+    function redirectTimer() {
+        var timeOutFunction = function() {
+            // variables
+            var status = self.getStatus();
+
+            // baseurl
+            var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
+
+            // parameters
+            href += "?i=" + userReference;
+            href += "&password=test";
+            href += "&ra=" + status.rA;
+            href += "&qa=" + status.qA;
+
+            $('#advert').hide();
+            $('#redirected').show();
+            $('#content').addClass('blurred');
+            location.href = href;
+        };
+        setTimeout(timeOutFunction, (timeToRedirect * 60) * 1000); // 60,000ms eq 1min
+    }
+
+    self.showCountdown = function() {
+        function toMin(secs) {
+            var s = parseInt(secs % 60);
+            return parseInt(secs / 60) + ":" + (s < 10 ? "0" : "") + s;
+        }
+
+        var self = {};
+        self.counter = 60 * timeToRedirect;
+        $('#countdown').html(toMin(self.counter));
+
+        self.id = setInterval(function() {
+            if (self.counter > 0) {
+                self.counter--;
+            }
+            $('#countdown').html(toMin(self.counter));
+        }, 1000);
+    };
+
+    return self;
+}
+
+function intro() {
+    var self = {
+        site: 1
+    };
+
+    self.next = function() {
+        $('#intro .site' + self.site).hide();
+        self.site += 1;
+        if (self.site <= 5) {
+            $('#intro .site' + self.site).show();
+        } else {
+            self.start();
+        }
+    };
+
+    self.start = function() {
+        $('#intro').hide();
+        app.initialize();
+    };
+
+    return self;
+}
