@@ -197,6 +197,7 @@ function intro() {
     var self = {
         site: 0
     };
+    $('#content').addClass('blurred');
 
     self.next = function() {
         $($('#intro .item')[self.site]).hide();
@@ -210,6 +211,7 @@ function intro() {
 
     self.start = function() {
         $('#intro').hide();
+        $('#content').removeClass('blurred');
         app.initialize();
     };
 
