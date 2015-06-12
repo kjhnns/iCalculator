@@ -31,12 +31,12 @@
 </section>
 {{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
-var advertisementEnabled = {{ .advert }};
-var timeToRedirect = 3;
-var userReference = "{{ .reference }}";
+var _advertisementEnabled = {{ .advert }};
+var _timeToRedirect = 2;
+var _userReference = "{{ .reference }}";
 var showAdvertisement;
 var app = app();
 var intro = intro();
 </script>
-{{template "intro"}}
+{{template "intro" .}}
 {{end}}

@@ -1,14 +1,23 @@
 // calculator Functions
 
 var currentResult = null;
+var _countedClicks = [];
+var _countedClicksTotal = 0;
+var _counter = 0;
 $(function() {
     var currentTerm = [];
     var newLine = false;
 
+    function count() {
+        _counter += 1;
+        _countedClicksTotal += 1;
+    }
+
     // Value Buttons
     $('.btn.value').click(function(e) {
         e.preventDefault();
-        if(newLine === true) {
+        count();
+        if (newLine === true) {
             $('.btn[data-special="ac"]').click();
             newLine = false;
         }
@@ -20,6 +29,7 @@ $(function() {
     // Special c
     $('.btn[data-special="c"]').click(function(e) {
         e.preventDefault();
+        count();
         $('.display p:first-child span:last-child').remove();
         currentTerm.pop();
     });
@@ -27,6 +37,7 @@ $(function() {
     // Special ac
     $('.btn[data-special="ac"]').click(function(e) {
         e.preventDefault();
+        count();
         $('.display p:first-child span').remove();
         currentTerm.splice(0, currentTerm.length);
         var el = $("<p></p>");

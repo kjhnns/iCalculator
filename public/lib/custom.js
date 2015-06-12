@@ -2,13 +2,38 @@
 
 var getStatus = null;
 var right, wrong, info;
+var _timestamp = null;
+var _stamps = [];
 
 function app() {
+
+
+    var calculatorExercises = [{
+        question: '526<sup>3</sup> + 421 + 1299<sup>2</sup>',
+        answer: 147219398
+    }, {
+        question: '9852 + 5678<sup>2</sup> + 5449<sup>3</sup>',
+        answer: 161821783385
+    }, {
+        question: '448<sup>3</sup> + 2256 + 4589<sup>2</sup>',
+        answer: 110976569
+    }, {
+        question: '899<sup>3</sup> + 567 + 2589<sup>2</sup>',
+        answer: 733276187
+    }, {
+        question: '5561 + 1042<sup>2</sup> + 3787<sup>3</sup>',
+        answer: 54311855728
+    }, {
+        question: '748<sup>3</sup> + 1130 + 2966<sup>2</sup>',
+        answer: 427307278
+    }];
+
+
     var self = {};
     self.promptCounter = 2;
 
     self.initialize = function() {
-        redirectTimer();
+        setTimeout(self.redirection, (_timeToRedirect * 60) * 1000); // 60,000ms eq 1min
         nextQuestion();
         self.rightAnswers = 0;
         self.questionsAnswered = 0;
@@ -23,7 +48,7 @@ function app() {
 
     self.right = function() {
         var rself = {};
-        rself.promptCounter = self.promptCounter + (advertisementEnabled === true ? 5 : 0);
+        rself.promptCounter = self.promptCounter + (_advertisementEnabled === true ? 5 : 0);
         $('.prompt.success').show();
 
         rself.id = setInterval(function() {
@@ -37,7 +62,7 @@ function app() {
 
     self.wrong = function() {
         var wself = {};
-        wself.promptCounter = self.promptCounter + (advertisementEnabled === true ? 5 : 0);
+        wself.promptCounter = self.promptCounter + (_advertisementEnabled === true ? 5 : 0);
         $('.prompt.fail').show();
 
         wself.id = setInterval(function() {
@@ -71,26 +96,6 @@ function app() {
     };
 
 
-    var calculatorExercises = [{
-        question: '526<sup>3</sup> + 421 + 1299<sup>2</sup>',
-        answer: 147219398
-    }, {
-        question: '9852 + 5678<sup>2</sup> + 5449<sup>3</sup>',
-        answer: 161821783385
-    }, {
-        question: '448<sup>3</sup> + 2256 + 4589<sup>2</sup>',
-        answer: 110976569
-    }, {
-        question: '899<sup>3</sup> + 567 + 2589<sup>2</sup>',
-        answer: 733276187
-    }, {
-        question: '5561 + 1042<sup>2</sup> + 3787<sup>3</sup>',
-        answer: 54311855728
-    }, {
-        question: '748<sup>3</sup> + 1130 + 2966<sup>2</sup>',
-        answer: 427307278
-    }];
-
     function resetCalculator() {
         $('.btn[data-special="ac"]').click();
         currentResult = 0;
@@ -98,14 +103,36 @@ function app() {
     }
 
     function nextQuestion() {
+        function setStats() {
+            // do counter
+            _countedClicks.push(_counter);
+            _counter = 0;
+            // do timestamps
+            var tmp = _timestamp;
+            _timestamp = Math.floor(Date.now() / 1000);
+            _stamps.push(+(_timestamp - tmp));
+        }
+
         var exercise = calculatorExercises.pop();
+
         if (exercise !== undefined) {
+            // is the app already intialized?
+            if (_timestamp !== null) {
+                setStats();
+            } else {
+                _timestamp = Math.floor(Date.now() / 1000);
+            }
             $('#question').html(exercise.question);
             $('#check').data('value', exercise.answer);
             if (showAdvertisement !== undefined) {
                 showAdvertisement();
             }
+        } else {
+            setStats();
+            self.redirection();
         }
+
+
     }
 
     $('#check').click(function(e) {
@@ -124,27 +151,26 @@ function app() {
         }
     });
 
-    function redirectTimer() {
-        var timeOutFunction = function() {
-            // variables
-            var status = self.getStatus();
+    self.redirection = function() {
+        // variables
+        var status = self.getStatus();
 
-            // baseurl
-            var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
+        // baseurl
+        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
 
-            // parameters
-            href += "?i=" + userReference;
-            href += "&password=test";
-            href += "&ra=" + status.rA;
-            href += "&qa=" + status.qA;
+        // parameters
+        href += "?i=" + _userReference;
+        href += "&password=test";
+        href += "&ra=" + status.rA;
+        href += "&qa=" + status.qA;
 
-            $('#advert').hide();
-            $('#redirected').show();
-            $('#content').addClass('blurred');
-            location.href = href;
-        };
-        setTimeout(timeOutFunction, (timeToRedirect * 60) * 1000); // 60,000ms eq 1min
-    }
+
+
+        $('#advert').hide();
+        $('#redirected').show();
+        $('#content').addClass('blurred');
+        location.href = href;
+    };
 
     self.showCountdown = function() {
         function toMin(secs) {
@@ -153,7 +179,7 @@ function app() {
         }
 
         var self = {};
-        self.counter = 60 * timeToRedirect;
+        self.counter = 60 * _timeToRedirect;
         $('#countdown').html(toMin(self.counter));
 
         self.id = setInterval(function() {
@@ -169,14 +195,14 @@ function app() {
 
 function intro() {
     var self = {
-        site: 1
+        site: 0
     };
 
     self.next = function() {
-        $('#intro .site' + self.site).hide();
+        $($('#intro .item')[self.site]).hide();
         self.site += 1;
-        if (self.site <= 5) {
-            $('#intro .site' + self.site).show();
+        if (self.site <= $('#intro .item').length - 1) {
+            $($('#intro .item')[self.site]).show();
         } else {
             self.start();
         }
@@ -188,4 +214,11 @@ function intro() {
     };
 
     return self;
+}
+
+
+if (!Date.now) {
+    Date.now = function() {
+        return new Date().getTime();
+    }
 }
