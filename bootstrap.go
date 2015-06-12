@@ -24,7 +24,7 @@ func bootstrap() {
 	}
 
 	// Listen and serve on 0.0.0.0:3000
-	g.Run(":" + port)
+	g.Run(":" + port
 }
 
 
