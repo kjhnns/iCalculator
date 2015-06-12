@@ -7,7 +7,7 @@ var _stamps = [];
 
 function app() {
 
-
+    var calculatorExercisesLength = 0;
     var calculatorExercises = [{
         question: '1129<sup>2</sup> + 321<sup>3</sup> + 1024',
         answer: 34351826
@@ -42,6 +42,7 @@ function app() {
     self.promptCounter = 2;
 
     self.initialize = function() {
+        calculatorExercisesLength = calculatorExercises.length;
         setTimeout(self.redirection, (_timeToRedirect * 60) * 1000); // 60,000ms eq 1min
         nextQuestion();
         self.rightAnswers = 0;
@@ -174,25 +175,25 @@ function app() {
         href += "&qa=" + status.qA; // total questions
         href += "&tc=" + _countedClicksTotal; // total clicks
 
+
         // add exercise timestamps && clicks
-        for (var i = 0; i < calculatorExercises.length; i++) {
+        for (var i = 0; i < calculatorExercisesLength; i++) {
             if (_stamps[i] !== undefined && _countedClicks[i] !== undefined) {
                 href += "&" + i + "s=" + _stamps[i];
                 href += "&" + i + "c=" + _countedClicks[i];
             }
         }
 
+        // finished by questions
         if (finished === true) {
-            href += "&fin=1"; // finished by questions
+            href += "&fin=1";
         }
-
 
 
         $('#advert').hide();
         $('#redirected').show();
         $('#content').addClass('blurred');
-        // location.href = href;
-        console.log(href);
+        location.href = href;
     };
 
     self.showCountdown = function() {
