@@ -23,13 +23,12 @@
                     </div>
                 </section>
             </div>
-            <div class="4u -1u">
+            <div class="5u">
                 {{template "calculator" .}}
             </div>
         </div>
     </div>
 </section>
-{{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 <script>
 var _advertisementEnabled = {{ .advert }};
 var _timeToRedirect = 2;
@@ -38,5 +37,6 @@ var showAdvertisement;
 var app = app();
 var intro = intro();
 </script>
+{{template "status" .}} {{if .advert}} {{template "advert" .}} {{end}}
 {{template "intro" .}}
 {{end}}

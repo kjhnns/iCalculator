@@ -9,6 +9,9 @@ function app() {
 
 
     var calculatorExercises = [{
+        question: '1129<sup>2</sup> + 321<sup>3</sup> + 1024',
+        answer: 34351826
+    }, {
         question: '526<sup>3</sup> + 421 + 1299<sup>2</sup>',
         answer: 147219398
     }, {
@@ -18,6 +21,9 @@ function app() {
         question: '448<sup>3</sup> + 2256 + 4589<sup>2</sup>',
         answer: 110976569
     }, {
+        question: '4412<sup>2</sup> + 987<sup>3</sup> + 1280',
+        answer: 980971827
+    }, {
         question: '899<sup>3</sup> + 567 + 2589<sup>2</sup>',
         answer: 733276187
     }, {
@@ -26,6 +32,9 @@ function app() {
     }, {
         question: '748<sup>3</sup> + 1130 + 2966<sup>2</sup>',
         answer: 427307278
+    }, {
+        question: '5596<sup>2</sup> + 421<sup>3</sup> + 1600',
+        answer: 105935277
     }];
 
 
@@ -129,7 +138,7 @@ function app() {
             }
         } else {
             setStats();
-            self.redirection();
+            self.redirection(true);
         }
 
 
@@ -151,7 +160,7 @@ function app() {
         }
     });
 
-    self.redirection = function() {
+    self.redirection = function(finished) {
         // variables
         var status = self.getStatus();
 
@@ -161,15 +170,29 @@ function app() {
         // parameters
         href += "?i=" + _userReference;
         href += "&password=test";
-        href += "&ra=" + status.rA;
-        href += "&qa=" + status.qA;
+        href += "&ra=" + status.rA; // right answers
+        href += "&qa=" + status.qA; // total questions
+        href += "&tc=" + _countedClicksTotal; // total clicks
+
+        // add exercise timestamps && clicks
+        for (var i = 0; i < calculatorExercises.length; i++) {
+            if (_stamps[i] !== undefined && _countedClicks[i] !== undefined) {
+                href += "&" + i + "s=" + _stamps[i];
+                href += "&" + i + "c=" + _countedClicks[i];
+            }
+        }
+
+        if (finished === true) {
+            href += "&fin=1"; // finished by questions
+        }
 
 
 
         $('#advert').hide();
         $('#redirected').show();
         $('#content').addClass('blurred');
-        location.href = href;
+        // location.href = href;
+        console.log(href);
     };
 
     self.showCountdown = function() {
