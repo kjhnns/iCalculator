@@ -166,7 +166,7 @@ function app() {
         var status = self.getStatus();
 
         // baseurl
-        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/freetrialfreemium/";
+        var href = "http://umfragen.ise.tu-darmstadt.de/sosci/iCalculator/";
 
         // parameters
         href += "?i=" + _userReference;
