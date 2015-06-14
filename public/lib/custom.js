@@ -181,6 +181,9 @@ function app() {
             if (_stamps[i] !== undefined && _countedClicks[i] !== undefined) {
                 href += "&" + i + "s=" + _stamps[i];
                 href += "&" + i + "c=" + _countedClicks[i];
+            } else {
+                href += "&" + i + "s=0";
+                href += "&" + i + "c=0";
             }
         }
 
