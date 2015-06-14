@@ -190,6 +190,8 @@ function app() {
         // finished by questions
         if (finished === true) {
             href += "&fin=1";
+        } else {
+            href += "&fin=0";
         }
 
 
