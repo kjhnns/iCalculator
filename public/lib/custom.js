@@ -196,6 +196,7 @@ function app() {
         $('#advert').hide();
         $('#redirected').show();
         $('#content').addClass('blurred');
+        window.onbeforeunload = null;
         location.href = href;
     };
 
