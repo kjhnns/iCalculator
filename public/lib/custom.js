@@ -112,16 +112,18 @@ function app() {
         $('#result').html(currentResult);
     }
 
+
+    function setStats() {
+        // do counter
+        _countedClicks.push(_counter);
+        _counter = 0;
+        // do timestamps
+        var tmp = _timestamp;
+        _timestamp = Math.floor(Date.now() / 1000);
+        _stamps.push(+(_timestamp - tmp));
+    }
+
     function nextQuestion() {
-        function setStats() {
-            // do counter
-            _countedClicks.push(_counter);
-            _counter = 0;
-            // do timestamps
-            var tmp = _timestamp;
-            _timestamp = Math.floor(Date.now() / 1000);
-            _stamps.push(+(_timestamp - tmp));
-        }
 
         var exercise = calculatorExercises.pop();
 
@@ -175,7 +177,7 @@ function app() {
         href += "&qa=" + status.qA; // total questions
         href += "&tc=" + _countedClicksTotal; // total clicks
 
-
+        setStats();
         // add exercise timestamps && clicks
         for (var i = 0; i < calculatorExercisesLength; i++) {
             if (_stamps[i] !== undefined && _countedClicks[i] !== undefined) {
