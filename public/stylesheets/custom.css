@@ -4,6 +4,20 @@ body {
     height: 100%;
 }
 
+div.imprint p {
+    color: #ccc;
+    font-size: 10px;
+    margin: 2px;
+    padding: 0;
+      line-height: initial;
+}
+
+div.imprint{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
 html {
     height: 100%;
 }
