@@ -57,7 +57,7 @@ $(function() {
             currentResult = roundToTwo(eval(formatTerm(currentTerm)));
         } catch (e) {
             if (e instanceof SyntaxError) {
-                var el = $("<span></span>").html("Syntax Fehler: ");
+                var el = $("<div></div>").html("Syntax Fehler: ");
                 $('.display p:first-child').prepend(el);
 
                 currentTerm.splice(0, currentTerm.length);
