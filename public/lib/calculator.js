@@ -70,7 +70,7 @@ $(function() {
         }
 
         if (isNaN(currentResult)) {
-            el = $("<span></span>").html("Invalid: ");
+            el = $("<div></div>").html("Invalid: ");
             $('.display p:first-child').prepend(el);
 
             currentTerm.splice(0, currentTerm.length);
