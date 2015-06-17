@@ -1,5 +1,6 @@
 body {
     min-width: 1024px;
+    min-height: 700px;
     overflow: scroll;
     height: 100%;
 }
@@ -9,11 +10,11 @@ div.imprint p {
     font-size: 10px;
     margin: 2px;
     padding: 0;
-      line-height: initial;
+    line-height: initial;
 }
 
-div.imprint{
-    position: fixed;
+div.imprint {
+    position: absolute;
     bottom: 0;
     left: 0;
 }
@@ -27,7 +28,7 @@ html {
 }
 
 .image.border {
-border: 5px #eee solid;
+    border: 5px #eee solid;
 }
 
 .blurred {
@@ -162,7 +163,7 @@ div.status p {
 }
 
 #calculator {
-    max-width:  316.744px;
+    max-width: 316.744px;
 }
 
 .resultbox {
