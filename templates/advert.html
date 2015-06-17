@@ -2,16 +2,20 @@
 <script>
 showAdvertisement = function() {
     var self = {};
-    self.counter = 3;
+    self.counter = 5;
+    $('#closeAdvert').attr('disabled', 'disabled');
     $('#advert').show();
     $('#content').addClass('blurred');
     $('#sec').html(self.counter);
+    $('#closeAdvert').click(function() {
+        $('#advert').hide();
+        $('#content').removeClass('blurred');
+    });
 
     self.id = setInterval(function() {
         self.counter--;
         if (self.counter < 0) {
-            $('#advert').hide();
-            $('#content').removeClass('blurred');
+            $('#closeAdvert').removeAttr('disabled');
             clearInterval(self.id);
         } else {
             $('#sec').html(self.counter);
@@ -28,7 +32,7 @@ showAdvertisement = function() {
                 <section class="special box" style="background-color: #fff">
                     <h1>Advertising</h1>
                     <img src="/public/images/pic03.jpg" alt="" class="image fit" style="cursor: pointer;" />
-                    <i>The advertising will disappear after <span id="sec">3</span> seconds.</i>
+                    <button class="button" id="closeAdvert">close advertisement (<span id="sec">5</span>)</button>
                 </section>
             </div>
         </div>
