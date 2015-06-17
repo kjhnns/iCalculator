@@ -124,8 +124,8 @@ function app() {
     }
 
     function nextQuestion() {
-
         var exercise = calculatorExercises.pop();
+            $('#check').attr('disabled', 'disabled');
 
         if (exercise !== undefined) {
             // is the app already intialized?
@@ -134,6 +134,7 @@ function app() {
             } else {
                 _timestamp = Math.floor(Date.now() / 1000);
             }
+
             $('#question').html(exercise.question);
             $('#check').data('value', exercise.answer);
             if (showAdvertisement !== undefined) {

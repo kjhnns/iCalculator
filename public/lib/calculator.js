@@ -91,6 +91,7 @@ $(function() {
         $('#result').html(currentResult);
         newLine = true;
 
+            $('#check').removeAttr('disabled');
     });
 
     function formatTerm(term) {
