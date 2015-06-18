@@ -123,6 +123,12 @@ function app() {
         _stamps.push(+(_timestamp - tmp));
     }
 
+    self.kill = function() {
+        _timeToRedirect = 99;
+        intro.start();
+        clearInterval(self.id);
+    };
+
     function nextQuestion() {
         var exercise = calculatorExercises.pop();
             $('#check').attr('disabled', 'disabled');
@@ -144,8 +150,6 @@ function app() {
             setStats();
             self.redirection(true);
         }
-
-
     }
 
     $('#check').click(function(e) {
